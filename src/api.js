@@ -29,15 +29,25 @@ router.get('/me', (req, res) => {
     const token = req.headers.authorization
     const users = []
   
-    axios.get('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
+    fetch('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
+      method: 'GET',
       headers: {
         'Authorization': `${token}`
       }
-    }).then(resp => {
-      res.send(resp.data);
-    }).catch(err => {
-      res.send({error: true, message: err?.response?.data?.error || 'unknown'});
     })
+    .then(response => response.json())
+    .then(data => res.send(data))
+    .catch(error => res.send({error: true, message: error.message || 'unknown'}));
+
+    // axios.get('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
+    //   headers: {
+    //     'Authorization': `${token}`
+    //   }
+    // }).then(resp => {
+    //   res.send(resp.data);
+    // }).catch(err => {
+    //   res.send({error: true, message: err?.response?.data?.error || 'unknown'});
+    // })
   });
   
 router.get('/test', (req, res) => {
