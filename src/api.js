@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     })
 })
 
-app.get('/me', (req, res) => {
+router.get('/me', (req, res) => {
     const token = req.headers.authorization
     const users = []
   
@@ -43,7 +43,7 @@ app.get('/me', (req, res) => {
     res.end('<h1>TEST work</h1>')
   });
   
-  app.get('/getPayedImages', (req, res) => {
+  router.get('/getPayedImages', (req, res) => {
     const token = req.headers.authorization
     const users = []
     const aa = 'https://api-gateway.modelcenter.jasmin.com/v1/me/performers/3453796/message-threads/89144742/messages?features[]=gifts&features[]=show-deleted&features[]=show-seen-status&page[limit]=20&page[cursor]=QUVTLTI1Ni1DQkM6Rt3JP1NpVHerdlhDwFWCijEyb3RDNmtGZlRqNlVacUJ1enkyYTdiMXRnaTdDUGNBSHJqTzhKUEplUzJUM0lTNFU3QTV3bXlwMHBuVnBHQzdkaE5xd0VNSkNtUTFqUWFTU1dRaDkxUmZCTlFrSjJWSnhsTUpWZGRCV3A3TkRXK1lVaDFBQ1ZDTk1pc2ZwZ0F4'
@@ -59,7 +59,7 @@ app.get('/me', (req, res) => {
     })
   });
   
-  app.get('/messageThreads', (req, res) => {
+  router.get('/messageThreads', (req, res) => {
     const token = req.headers.authorization
     const users = []
     let array = []
@@ -115,7 +115,7 @@ app.get('/me', (req, res) => {
   
   });
   
-  app.post('/pricing', (req, res) => {
+  router.post('/pricing', (req, res) => {
     const token = req.headers.authorization
     const modelId = req.body.modelId
     const url = `https://api-gateway.modelcenter.jasmin.com/v1/me/performers/${modelId}`
@@ -134,7 +134,7 @@ app.get('/me', (req, res) => {
     })
   });
   
-  app.get('/getMembers', (req, res) => {
+  router.get('/getMembers', (req, res) => {
     const token = req.headers.authorization
     const form = new FormData();
     form.append('orderBy', 'total_spent_amount');
@@ -152,7 +152,7 @@ app.get('/me', (req, res) => {
     })
   });
   
-  app.post('/sendMessage', upload.array(), (req, res) => {
+  router.post('/sendMessage', upload.array(), (req, res) => {
     console.log(req.body)
   
     const token = req.headers.authorization
