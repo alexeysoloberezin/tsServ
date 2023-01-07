@@ -2,11 +2,11 @@ const express = require('express')
 const serverless = require('serverless-http')
 const axios = require("axios");
 const cors = require('cors')
-const multer = require('multer')
-const upload = multer()
-const FormData = require('form-data');
+// const multer = require('multer')
+// const upload = multer()
+// const FormData = require('form-data');
 const bodyParser = require('body-parser')
-const {getMemberByName, getMemberId, sendMessage, sendMessageImg} = require("./methods");
+// const {getMemberByName, getMemberId, sendMessage, sendMessageImg} = require("./methods");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -24,20 +24,20 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/me', (req, res) => {
-    const token = req.headers.authorization
-    const users = []
+// router.get('/me', (req, res) => {
+//     const token = req.headers.authorization
+//     const users = []
   
-    axios.get('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
-      headers: {
-        'Authorization': `${token}`
-      }
-    }).then(resp => {
-      res.send(resp.data);
-    }).catch(err => {
-      res.send({error: true, message: err?.response?.data?.error || 'unknown'});
-    })
-  });
+//     axios.get('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
+//       headers: {
+//         'Authorization': `${token}`
+//       }
+//     }).then(resp => {
+//       res.send(resp.data);
+//     }).catch(err => {
+//       res.send({error: true, message: err?.response?.data?.error || 'unknown'});
+//     })
+//   });
   
 router.get('/test', (req, res) => {
   res.end('<h1>TEST work</h1>')
