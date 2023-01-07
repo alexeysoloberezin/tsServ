@@ -7,15 +7,16 @@ const cors = require('cors')
 // const FormData = require('form-data');
 const bodyParser = require('body-parser')
 // const {getMemberByName, getMemberId, sendMessage, sendMessageImg} = require("./methods");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
 
-app.use(cors())
 
 
 const app = express()
+app.use(cors())
+
 const router = express.Router()
 
 router.get('/', (req, res) => {
