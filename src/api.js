@@ -1,18 +1,18 @@
 const express = require('express')
 const serverless = require('serverless-http')
 const axios = require("axios");
-const cors = require('cors')
-const multer = require('multer')
-const upload = multer()
-const FormData = require('form-data');
-const bodyParser = require('body-parser')
-const {getMemberByName, getMemberId, sendMessage, sendMessageImg} = require("./methods");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+// const cors = require('cors')
+// const multer = require('multer')
+// const upload = multer()
+// const FormData = require('form-data');
+// const bodyParser = require('body-parser')
+// const {getMemberByName, getMemberId, sendMessage, sendMessageImg} = require("./methods");
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
 
-app.use(cors())
+// app.use(cors())
 
 
 const app = express()
