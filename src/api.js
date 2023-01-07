@@ -39,7 +39,7 @@ app.get('/me', (req, res) => {
     })
   });
   
-  app.get('/test', (req, res) => {
+  router.get('/test', (req, res) => {
     res.end('<h1>TEST work</h1>')
   });
   
