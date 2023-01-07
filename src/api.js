@@ -27,28 +27,20 @@ router.get('/', (req, res) => {
 
 router.get('/me', (req, res) => {
   let token = req.headers.authorization
-  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjIwMTM4MzU3ZThkNDRkOGM5ZDU5NzIxZWEwOTA5ZDZkZWJhNTEzYzQ3NjlmODEyZTE1YmIxMjY5ZTNjZjUyYmZlZmQ0MGRkYTM5NWYxYzA0In0.eyJhdWQiOiJtc2MtcG9ydGFsIiwianRpIjoiMjAxMzgzNTdlOGQ0NGQ4YzlkNTk3MjFlYTA5MDlkNmRlYmE1MTNjNDc2OWY4MTJlMTViYjEyNjllM2NmNTJiZmVmZDQwZGRhMzk1ZjFjMDQiLCJpYXQiOjE2NzMwOTUwNjksIm5iZiI6MTY3MzA5NTA2OSwiZXhwIjoxNjczMDk4NjY5LCJzdWIiOiIyMTUyMjg4Iiwic2NvcGVzIjpbIioiXX0.NdK4D2oQCBrC1SlEJMW7BQTiHbVLsm2DTUVeM3Q9IQj5t6CWp2R_ExppbIdzXMabkbsQmJkt6r4F8zPR-DkKb7VVJ-c0E2GXZ86db1YvP3ebdA7tj_mgbQ4AOwYnE-jeP2Vuq9jcaG6ng6ROZx2hsw3FAnZhPpWCnEHkO9G97MCzC0nUwsSxKQkUQRUSHQHmStp_Auncuw4jfhJ7UFHPCjv14Jbb6Ospt8txX_CDt43yJ63kmV5H4tFZQhhP29fuXZhXHTEbmNVXJDKisPHKUNbHyEig0EMedp7n33dyBYYrtf0T_3tPLo2sYVccP8OP9XWATmwt1F1GfF4z6QxmeKXFLc_vAWNtRpBMpGn10tXelbCxea8EUV5-dvkWTF-Cu5xVj201ettAut06pVvpiHVbfLogFpYlvyvPwLh-6-sf4j7T8eQG_RQ4aREBJZQTCSo5GIYqFTJ4MWuKHeHRNXSL4pifxRZZjTomevYB1k_PARE51AC_0_DXuDC1WO3oZ-Q7YOD8Lo6b9_RBLUa3Kc1ktQu2r7HORl-4lxknY7D3uUutRWWtykLVCzARHxgJaMa9CB48v9qko5THRw5UDAl3AGOjFDQfM12nzM7W962T-2r5gkba4YkzquNs50oIANSxbm_ROLDfFE2g3Y1krhQKL26htzh77gBXIVMi914'
   const users = []
 
-  // fetch('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
-  //   method: 'GET',
-  //   headers: {
-  //     'Authorization': `${token}`
-  //   }
-  // })
-  // .then(response => response.json())
-  // .then(data => res.send(data))
-  // .catch(error => res.send({error: true, message: error.message || 'unknown'}));
-
-  axios.get('https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me', {
+  request.get({
+    url: 'https://api-gateway.modelcenter.jasmin.com/gw/inner/v2/me',
     headers: {
       'Authorization': `${token}`
     }
-  }).then(resp => {
-    res.send(resp.data);
-  }).catch(err => {
-    res.send({error: true, message: err?.response?.data?.error || 'unknown'});
-  })
+  }, (error, response, body) => {
+    if (error) {
+      res.send({error: true, message: error});
+    } else {
+      res.send(body);
+    }
+  }); 
 });
   
 router.get('/test', (req, res) => {
