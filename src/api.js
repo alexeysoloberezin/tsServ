@@ -152,54 +152,54 @@ router.get('/test', (req, res) => {
     })
   });
   
-  router.post('/sendMessage', upload.array(), (req, res) => {
-    console.log(req.body)
+  // router.post('/sendMessage', upload.array(), (req, res) => {
+  //   console.log(req.body)
   
-    const token = req.headers.authorization
-    const text = req.body.message
-    const name = req.body.name
-    const typeMessage = req.body.type || 'message'
-    const modelId = req.body.modelId
-    const price = req.body.price
-    const img = req.body.modelId
+  //   const token = req.headers.authorization
+  //   const text = req.body.message
+  //   const name = req.body.name
+  //   const typeMessage = req.body.type || 'message'
+  //   const modelId = req.body.modelId
+  //   const price = req.body.price
+  //   const img = req.body.modelId
   
-    if (!name) return res.send({error: true, message: 'name is required'});
-    if (!text) return res.send({error: true, message: 'message is required'});
-    if (!modelId) return res.send({error: true, message: 'modelId is required'});
-    if (typeMessage === 'image' && !toString(price)) return res.send({error: true, message: 'price is required'});
+  //   if (!name) return res.send({error: true, message: 'name is required'});
+  //   if (!text) return res.send({error: true, message: 'message is required'});
+  //   if (!modelId) return res.send({error: true, message: 'modelId is required'});
+  //   if (typeMessage === 'image' && !toString(price)) return res.send({error: true, message: 'price is required'});
   
-    const url = `https://api-gateway.modelcenter.jasmin.com/v1/me/performers/${modelId}`
+  //   const url = `https://api-gateway.modelcenter.jasmin.com/v1/me/performers/${modelId}`
   
-    return res.send({error: true, message: ''});
+  //   return res.send({error: true, message: ''});
   
-    getMemberByName({name, token, url}).then(resp => {
-      getMemberId({
-        id: resp.data.data.id || '',
-        name: resp.data.data.nick || '',
-        text, token, url
-      }).then(resp => {
-        if (typeMessage === 'image') {
-          sendMessageImg({userId: resp.data.data.id || '', text, url, price, type: typeMessage, token}).then(resp => {
-            res.send(resp.data);
-          }).catch(err => {
-            console.log(err)
-            res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'sendMessageImg'});
-          })
-        } else {
-          console.log('222')
-          sendMessage({userId: resp.data.data.id || '', text, url, token}).then(resp => {
-            res.send(resp.data);
-          }).catch(err => {
-            res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'sendMessage'});
-          })
-        }
-      }).catch(err => {
-        res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'getMemberId'});
-      })
-    }).catch(err => {
-      res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'getMemberByName'});
-    })
-  });
+  //   getMemberByName({name, token, url}).then(resp => {
+  //     getMemberId({
+  //       id: resp.data.data.id || '',
+  //       name: resp.data.data.nick || '',
+  //       text, token, url
+  //     }).then(resp => {
+  //       if (typeMessage === 'image') {
+  //         sendMessageImg({userId: resp.data.data.id || '', text, url, price, type: typeMessage, token}).then(resp => {
+  //           res.send(resp.data);
+  //         }).catch(err => {
+  //           console.log(err)
+  //           res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'sendMessageImg'});
+  //         })
+  //       } else {
+  //         console.log('222')
+  //         sendMessage({userId: resp.data.data.id || '', text, url, token}).then(resp => {
+  //           res.send(resp.data);
+  //         }).catch(err => {
+  //           res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'sendMessage'});
+  //         })
+  //       }
+  //     }).catch(err => {
+  //       res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'getMemberId'});
+  //     })
+  //   }).catch(err => {
+  //     res.send({error: true, message: err?.response?.data?.error || 'unknown', step: 'getMemberByName'});
+  //   })
+  // });
 
 app.use('/.netlify/functions/api', router)
 
